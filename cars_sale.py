@@ -6,7 +6,7 @@ import streamlit.components.v1 as stc
 import pandas as pd
 import pandas.io.sql as sqlio
 import pandasql as ps
-import os, io, cv2, sys, re
+import sys
 from datetime import datetime
 import psycopg2
 import math
@@ -37,7 +37,7 @@ background-size: cover;
 
 def inventory():
     st.write("#### Cars at best prices...")
-    conn = psycopg2.connect(host='35.240.192.226', port=5435, dbname='users', user='postgres', password='ravish')
+    conn = psycopg2.connect(host='10.148.0.5', port=5435, dbname='users', user='postgres', password='ravish')
     sql = "select * from car_details;"
     dat = sqlio.read_sql_query(sql, conn)
     conn = None
@@ -88,7 +88,7 @@ def sell_car():
         st.write("### Uploading the given data points...")
         if torque is None:
             torque = "NA"
-        conn2 = psycopg2.connect(host='35.240.192.226', port=5435, dbname='users', user='postgres', password='ravish')
+        conn2 = psycopg2.connect(host='10.148.0.5', port=5435, dbname='users', user='postgres', password='ravish')
         with conn2:
             cur = conn2.cursor()
             #st.write(name,year,km_driven,fuel,seller_type,transmission,owner,mileage,engine,max_power,torque,seats)

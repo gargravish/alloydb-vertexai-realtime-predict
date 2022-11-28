@@ -1,4 +1,5 @@
 FROM python:3.7
+LABEL OWNER="ravishgarg@google.com"
 
 RUN apt-get install -y gcc
 RUN apt-get install -y libc-dev
@@ -20,22 +21,11 @@ ENV PATH="/home/ravish/.local/bin:${PATH}"
 
 RUN pip3 install -r ./requirements.txt
 
-#RUN pip install --user -r ./requirements.txt
-# Expose port you want your app on
 EXPOSE 8512
-# Upgrade pip and install requirements
 
-#RUN pip install -U pip
-#RUN pip install streamlit
-#RUN pip install pandas
-#RUN pip install pandasql
-#RUN pip install psycopg2-binary
-#RUN pip install datetime
-
-# Copy app code and set working directory
 COPY --chown=ravish:ravish power-by-cloud.png power-by-cloud.png
 COPY --chown=ravish:ravish cars_sale.py cars_sale.py
 RUN ls -ltr
 RUN ls -ltr /home/ravish/.local/bin/streamlit
-# Run
+# RUN
 ENTRYPOINT ["/home/ravish/.local/bin/streamlit", "run", "cars_sale.py", "--server.port=8512", "--server.address=0.0.0.0"]
